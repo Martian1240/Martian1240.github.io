@@ -1,0 +1,232 @@
+<html>
+    <head>
+        <title>weezer clicker</title>
+      <style>
+        .sectionLeft{
+            float: left;
+            width: 80%;
+        }
+        .sectionRight{
+        float: right;
+        width: 20%;
+        }
+        .scoreContainer{
+            background-color: rgb(238, 238, 238);
+            width: 50%;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .ClickerContainer img{
+            position: relative;
+            transition: all 0.2s ease-in-out
+
+        }
+
+        .ClickerContainer:hover { transition: scale(1.10); }
+        .ClickerContainer:active { transition: scale(0.99);}
+
+        .shopButtons{
+            background-color: #b5b5b5;
+            transition: all .2s ease-in-out;
+            border-radius: 10px;
+            width: 100%;
+            margin: 10px 0px 10px 0px;
+            
+        }
+
+        .shopButtons:hover {
+            background-color: #c7c7c7;
+            transition: all .2s ease-in-out;
+        }
+
+        .shopButtons img
+
+        .shopButtons #image {
+            width: 25%;
+        }
+
+        .shopButtons img {
+            height: 64px;
+            width: 64px;
+        }
+
+        .shopButtons #nameAndCost p {
+            margin: 0px;
+            width: 60%;
+        }
+
+        .shopButtons #nameAndCost p:first-of-type{
+            font-size: 24px;
+        }
+
+        .shopButtons #amount {
+            font-size: 48px;
+            color: #595959;
+            font-family: sans-serif;
+        }
+        
+        .unselectable {
+            user-select: none;
+            -moz-user-select:;
+            -webkit-user-select:;
+        }
+
+        .sectionfooter {
+            font-family: sans-serif;
+            
+        }
+      </style>
+    </head>
+
+    <body>
+        <div class="sectionLeft">
+        <center>
+            <div class="scoreContainer">
+        <span id="score">0</span> Blue Albums<br>
+        <span id="SPS">0</span> Blue Albums Per Second<br>
+            </div>
+            <div class="ClickerContainer">
+        <img src="images/Weezer.jpg" height="256px" width="256px" onclick="addToScore (clickingpower)">
+            </div>
+            <button onclick="savegame">Save Game</button>
+        </center>
+        </div>
+        <div class="sectionFooter">
+            <h5>weezer clicker</h5>
+        </div>
+        <div class="sectionRight">
+            <table class="shopButtons unselectable" onclick="buyWeezerFan()">
+                <tr>
+                    <td id="image"><img src="images/WeezerFan.jpg"></td>
+                    <td id="nameAndCost">
+                        <p>weezer fan</p>
+                        <p> <span id="weezerfancost">15</span> blue albums </p>
+                    </td>
+                        <td id="amount"><span id="weezerfans">0</span></td>
+                    </td>
+                </tr>
+            </table>
+            <table class="shopButtons unselectable" onclick="buyGreenAlbum()">
+                <tr>
+                    <td id="image"><img src="images/Green.jpg"></td>
+                    <td id="nameAndCost">
+                        <p>green album</p>
+                        <p> <span id="GreenAlbumCost">100</span> blue albums </p>
+                    </td>
+                        <td id="amount"><span id="GreenAlbums">0</span></td>
+                    </td>
+                </tr>
+            </table>
+        </table>
+        <table class="shopButtons unselectable" onclick="buypink()">
+            <tr>
+                <td id="image"><img src="images/pink.jpg"></td>
+                <td id="nameAndCost">
+                    <p>Pinkerton</p>
+                    <p> <span id="Pinkcost">500</span> blue albums </p>
+                </td>
+                    <td id="amount"><span id="pink">0</span></td>
+                </td>
+            </tr>
+        </table>
+        </div>
+       
+
+        <script>
+            var score = 0;
+            var clickingpower = 1;
+
+            var weezerfancost = 15;
+            var weezerfans = 0;
+
+            var GreenAlbumCost = 100;
+            var GreenAlbums = 0;
+
+            var Pinkcost=500
+            var pink=0
+
+
+            function buyWeezerFan (){
+                if (score >= weezerfancost) {
+                    score = score - weezerfancost;
+                    weezerfans = weezerfans + 1;
+                    weezerfancost = Math.round(weezerfancost * 1.15);
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("weezerfancost").innerHTML = weezerfancost;
+                    document.getElementById("weezerfans").innerHTML = weezerfans;
+                    document.getElementById("score").innerHTML = score;
+                    updateScorePerSecond()
+                }
+            }
+
+            function buyGreenAlbum (){
+                if (score >= GreenAlbumCost) {
+                    score = score - GreenAlbumCost;
+                    GreenAlbums = GreenAlbums + 1;
+                    GreenAlbumCost = Math.round(GreenAlbumCost * 1.15);
+                    
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("GreenAlbumCost").innerHTML = GreenAlbumCost;
+                    document.getElementById("GreenAlbums").innerHTML = GreenAlbums;
+                    updateScorePerSecond()
+                }
+            }
+
+            function buypink (){
+                if (score >=Pinkcost) {
+                    score = score - Pinkcost;
+                   pink = pink + 1;
+                   Pinkcost = Math.round(Pinkcost * 1.15);
+                    
+
+                    document.getElementById("score").innerHTML = score;
+                    document.getElementById("Pinkcost").innerHTML = Pinkcost;
+                    document.getElementById("pink").innerHTML = pink;
+                    updateScorePerSecond()
+                }
+            }
+
+
+            function addToScore (amount) {
+                score = score + amount
+                document.getElementById("score").innerHTML = score;
+            }
+
+            function updateScorePerSecond(){
+                SPS = weezerfans + GreenAlbums * 10 + pink * 50;
+                document.getElementById("SPS").innerHTML = SPS;
+            }
+
+            function savegame(){
+                var gamesave = {
+                    score: score,
+                    clickingpower: clickingpower,
+                    weezerfancost: weezerfancost,
+                    weezerfans: weezerfans,
+                    GreenAlbumCost: GreenAlbumCost,
+                    GreenAlbums: GreenAlbums,
+                    Pinkcost: Pinkcost,
+                    pink: pink
+                };
+                localStorage.setItem("gamesave", JSON.stringify(gamesave));
+            }
+
+            setInterval(function(){
+                score = score + weezerfans;
+                score = score + GreenAlbums * 10;
+                score = score + pink * 50
+                document.getElementById("score").innerHTML = score;
+            }, 1000); // 1000ms = 1 second
+
+            setInterval(function() {
+                savegame();
+            }, 30000)// 30000ms is 30 seconds
+
+
+
+           document.title = score + " Blue Albums - weezer clicker"
+        </script>
+    </body>
+</html>
