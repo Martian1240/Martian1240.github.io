@@ -199,6 +199,17 @@
                 document.getElementById("SPS").innerHTML = SPS;
             }
 
+            function loadgame() {
+                var savedgame = JSON.parse(localStorage.getItem("gamesave"));
+                if (typeof savedgame.score !== "undefined") score = savedgame.score;
+                if (typeof savedgame.clickingpower !== "undefined") score = savedgame.clickingpower;
+                if (typeof savedgame.weezerfancost !== "undefined") score = savedgame.weezerfancost;
+                if (typeof savedgame.weezerfans !== "undefined") score = savedgame.weezerfans;
+                if (typeof savedgame.GreenAlbumCost !== "undefined") score = savedgame.GreenAlbumCost;
+                if (typeof savedgame.GreenAlbums !== "undefined") score = savedgame.GreenAlbums;
+                if (typeof savedgame.pink !== "undefined") score = savedgame.pink;
+            };
+
             function savegame(){
                 var gamesave = {
                     score: score,
@@ -211,7 +222,20 @@
                     pink: pink
                 };
                 localStorage.setItem("gamesave", JSON.stringify(gamesave));
-            }
+            };
+
+            window.onload = function () {
+                loadgame();
+                updateScorePerSecond();
+                document.getElementById("score").innerHTML = score;
+                    document.getElementById("weezerfancost").innerHTML = weezerfancost;
+                    document.getElementById("weezerfans").innerHTML = weezerfans; 
+                    document.getElementById("GreenAlbumCost").innerHTML = GreenAlbumCost;
+                    document.getElementById("GreenAlbums").innerHTML = GreenAlbums;
+                  
+                    document.getElementById("Pinkcost").innerHTML = Pinkcost;
+                    document.getElementById("pink").innerHTML = pink;
+            };
 
             setInterval(function(){
                 score = score + weezerfans;
@@ -222,7 +246,7 @@
 
             setInterval(function() {
                 savegame();
-            }, 30000)// 30000ms is 30 seconds
+            }, 30000);// 30000ms is 30 seconds
 
 
 
