@@ -228,13 +228,12 @@
                 loadgame();
                 updateScorePerSecond();
                 document.getElementById("score").innerHTML = score;
-                    document.getElementById("weezerfancost").innerHTML = weezerfancost;
-                    document.getElementById("weezerfans").innerHTML = weezerfans; 
-                    document.getElementById("GreenAlbumCost").innerHTML = GreenAlbumCost;
-                    document.getElementById("GreenAlbums").innerHTML = GreenAlbums;
-                  
-                    document.getElementById("Pinkcost").innerHTML = Pinkcost;
-                    document.getElementById("pink").innerHTML = pink;
+                document.getElementById("weezerfancost").innerHTML = weezerfancost;
+                document.getElementById("weezerfans").innerHTML = weezerfans; 
+                document.getElementById("GreenAlbumCost").innerHTML = GreenAlbumCost;
+                document.getElementById("GreenAlbums").innerHTML = GreenAlbums;
+                document.getElementById("Pinkcost").innerHTML = Pinkcost;
+                document.getElementById("pink").innerHTML = pink;
             };
 
             setInterval(function(){
@@ -248,7 +247,11 @@
                 savegame();
             }, 30000);// 30000ms is 30 seconds
 
-
+            document.addEventListener("keydown", function(event) {
+                if (event.ctrlKey && event.which == 83 ) (//ctrl + s 
+                event.preventDefault()
+                );
+            }, false);
 
            document.title = score + " Blue Albums - weezer clicker"
         </script>
